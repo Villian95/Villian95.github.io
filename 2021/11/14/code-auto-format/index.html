@@ -1,0 +1,295 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prettier自动格式化代码和提交信息规范化（采用Git 版本控制） | Villian's Blog</title><meta name="keywords" content="代码规范,Prettier,Git"><meta name="author" content="Villian,Villian95@163.com"><meta name="copyright" content="Villian"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Prettier自动格式化代码和提交信息规范化（采用Git 版本控制）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Prettier自动格式化代码和提交信息规范化（采用Git 版本控制）">
+<meta property="og:url" content="https://villian95.github.io/2021/11/14/code-auto-format/index.html">
+<meta property="og:site_name" content="Villian&#39;s Blog">
+<meta property="og:description" content="Prettier自动格式化代码和提交信息规范化（采用Git 版本控制）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://w.wallhaven.cc/full/j3/wallhaven-j3d7d5.jpg">
+<meta property="article:published_time" content="2021-11-14T06:26:00.000Z">
+<meta property="article:modified_time" content="2021-11-14T07:29:23.384Z">
+<meta property="article:author" content="Villian">
+<meta property="article:tag" content="代码规范">
+<meta property="article:tag" content="Prettier">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://w.wallhaven.cc/full/j3/wallhaven-j3d7d5.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://villian95.github.io/2021/11/14/code-auto-format/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Prettier自动格式化代码和提交信息规范化（采用Git 版本控制）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-11-14 15:29:23'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/hexo-electric-clock@1.0.6/clock.css"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://w.wallhaven.cc/full/5d/wallhaven-5dg783.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 存档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 🎵</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 🎬</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://w.wallhaven.cc/full/j3/wallhaven-j3d7d5.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Villian's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 存档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 🎵</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 🎬</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Prettier自动格式化代码和提交信息规范化（采用Git 版本控制）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-11-14T06:26:00.000Z" title="发表于 2021-11-14 14:26:00">2021-11-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-11-14T07:29:23.384Z" title="更新于 2021-11-14 15:29:23">2021-11-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Git/">Git</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">769</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Prettier自动格式化代码和提交信息规范化（采用Git 版本控制）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="依赖前置"><a href="#依赖前置" class="headerlink" title="依赖前置"></a>依赖前置</h2><ul>
+<li><code>husky</code> 一个为 git 客户端增加 hook 的工具</li>
+<li><code>prettier</code> 代码格式化工具</li>
+<li><code>eslint-config-prettier</code> 如果您使用ESLint，请安装ESLint config prettier，使ESLint和prettier能够很好地相互配合。它关闭了所有不必要或可能与Prettier冲突的ESLint规则</li>
+<li><code>lint-staged</code> 一个仅仅过滤出 Git 代码暂存区文件(被 git add 的文件)的工具</li>
+<li><code>@commitlint/config-conventional</code>，<code>@commitlint/cli</code> 帮助您的团队遵守提交约定。通过支持npm安装的配置，可以轻松共享提交约定，详情请查阅<a target="_blank" rel="noopener" href="https://commitlint.js.org/">commintlint</a>官网。</li>
+</ul>
+<div class="note info flat"><p>本文章采用<code>yarn</code>工具进行依赖下载</p>
+</div>
+
+<h2 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h2><h3 id="下载prettier，eslint-config-prettier"><a href="#下载prettier，eslint-config-prettier" class="headerlink" title="下载prettier，eslint-config-prettier"></a>下载<code>prettier</code>，<code>eslint-config-prettier</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add -D prettier eslint-config-prettier</span><br></pre></td></tr></table></figure>
+<p>创建<code>.prettierrc.json</code>文件。生成一个空的.prettierrc.json文件，让编译器知道您在使用prettier，也可以采用手动创建。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> &#123;&#125;&gt; .prettierrc.json</span><br></pre></td></tr></table></figure>
+<p>创建.prettierignore 文件，并可以添加忽略格式化的文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Ignore artifacts:</span><br><span class="line">build</span><br><span class="line">coverage</span><br></pre></td></tr></table></figure>
+<p>更多信息请查阅: <a target="_blank" rel="noopener" href="https://prettier.io/docs/en/index.html">prettier</a></p>
+<h3 id="下载husky，lint-staged"><a href="#下载husky，lint-staged" class="headerlink" title="下载husky，lint-staged"></a>下载<code>husky</code>，<code>lint-staged</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yarn add -D husky lint-staged</span><br><span class="line">npm set-script prepare <span class="string">&quot;husky install&quot;</span></span><br><span class="line">npm run prepare</span><br><span class="line">npx husky add .husky/pre-commit <span class="string">&quot;npx lint-staged&quot;</span></span><br></pre></td></tr></table></figure>
+<p>运行以上命令说明：先安装<code>husky</code>和<code>lint-staged</code>，且在<code>package.json</code>文件<code>script</code>处设置<code>&#123;&quot;prepare&quot;：&quot;husky install&#125;</code>（当然也可以手动添加），然后运行<code>npm run prepare</code>会在根目录下生成一个<code>.husky</code>文件夹，随后在<code>.husky</code>文件下新增<code>pre-commit</code> 文件并添加内容<code>npx lint-staged</code>。</p>
+<p>添加以下配置到package.json：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;lint-staged&quot;: &#123;</span><br><span class="line">    &quot;*.&#123;vue,js,jsx,md&#125;&quot;: &quot;prettier --write --ignore-unknown&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="下载并配置commitlint"><a href="#下载并配置commitlint" class="headerlink" title="下载并配置commitlint"></a>下载并配置<code>commitlint</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add -D @commitlint/cli @commitlint/config-conventional</span><br><span class="line">npx husky add .husky/commit-msg <span class="string">&quot;npx --no-install commitlint --edit <span class="variable">$1</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<p>在根目录下新增<code>commitlint.config.js</code>，并添加一下内容:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">extends</span>: [<span class="string">&#x27;@commitlint/config-conventional&#x27;</span>], <span class="comment">// =&gt; commitlint/config-conventional</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>或者可以直接运行下面的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;module.exports = &#123;extends: [&#x27;@commitlint/config-conventional&#x27;]&#125;;&quot;</span> &gt; commitlint.config.js</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>说明</strong><br>提交格式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &lt;<span class="built_in">type</span>&gt;: &lt;description&gt;</span><br></pre></td></tr></table></figure>
+<p>type(默认):</p>
+<table>
+<thead>
+<tr>
+<th>type</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>feat</td>
+<td>A new feature(新增feature)</td>
+</tr>
+<tr>
+<td>fix</td>
+<td>A bug fix(修复bug)</td>
+</tr>
+<tr>
+<td>docs</td>
+<td>Documentation only changes(仅文档更改，如README.md)</td>
+</tr>
+<tr>
+<td>refactor</td>
+<td>A code change that neither fixes a bug nor adds a feature(代码重构，没有新增功能或修复bug)</td>
+</tr>
+<tr>
+<td>perf</td>
+<td>A code change that improves performance(优化相关，如提升性能、用户体验等)</td>
+</tr>
+<tr>
+<td>test</td>
+<td>Adding missing tests or correcting existing tests(测试用例，包括单元测试、集成测试)</td>
+</tr>
+<tr>
+<td>build</td>
+<td>Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)(影响构建系统或外部依赖关系的更改（示例范围：gulp、broccoli、npm）)</td>
+</tr>
+<tr>
+<td>chore</td>
+<td>Other changes that don’t modify src or test files(其他不包含以上范围的更改)</td>
+</tr>
+<tr>
+<td>improvement</td>
+<td>An improvement to a current feature(对当前特性的改进)</td>
+</tr>
+<tr>
+<td>style</td>
+<td>Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)(不影响代码含义的更改（空格、格式、缺少分号等）)</td>
+</tr>
+<tr>
+<td>ci</td>
+<td>Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)(对ci配置文件和脚本的更改)</td>
+</tr>
+<tr>
+<td>revert</td>
+<td>Reverts a previous commit(还原以前的提交)</td>
+</tr>
+</tbody></table>
+<p>description: 描述信息</p>
+<div class="note info flat"><p><code>&lt;type&gt;: &lt;description&gt;</code>中间冒号后需要跟随一个空格</p>
+</div>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:Villian95@163.com">Villian</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://villian95.github.io/2021/11/14/code-auto-format/">https://villian95.github.io/2021/11/14/code-auto-format/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://villian95.github.io" target="_blank">Villian's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">代码规范</a><a class="post-meta__tags" href="/tags/Prettier/">Prettier</a><a class="post-meta__tags" href="/tags/Git/">Git</a></div><div class="post_share"><div class="social-share" data-image="https://w.wallhaven.cc/full/j3/wallhaven-j3d7d5.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/11/03/my-first-article/"><img class="next-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">my-first-article</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://w.wallhaven.cc/full/5d/wallhaven-5dg783.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Villian</div><div class="author-info__description">Web前端技术指北</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Villian95"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Villian95" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:Villian95@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E5%89%8D%E7%BD%AE"><span class="toc-number">1.</span> <span class="toc-text">依赖前置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">安装和配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDprettier%EF%BC%8Ceslint-config-prettier"><span class="toc-number">2.1.</span> <span class="toc-text">下载prettier，eslint-config-prettier</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDhusky%EF%BC%8Clint-staged"><span class="toc-number">2.2.</span> <span class="toc-text">下载husky，lint-staged</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%B9%B6%E9%85%8D%E7%BD%AEcommitlint"><span class="toc-number">2.3.</span> <span class="toc-text">下载并配置commitlint</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/11/14/code-auto-format/" title="Prettier自动格式化代码和提交信息规范化（采用Git 版本控制）"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://w.wallhaven.cc/full/j3/wallhaven-j3d7d5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Prettier自动格式化代码和提交信息规范化（采用Git 版本控制）"/></a><div class="content"><a class="title" href="/2021/11/14/code-auto-format/" title="Prettier自动格式化代码和提交信息规范化（采用Git 版本控制）">Prettier自动格式化代码和提交信息规范化（采用Git 版本控制）</a><time datetime="2021-11-14T06:26:00.000Z" title="发表于 2021-11-14 14:26:00">2021-11-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/11/03/my-first-article/" title="my-first-article"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="my-first-article"/></a><div class="content"><a class="title" href="/2021/11/03/my-first-article/" title="my-first-article">my-first-article</a><time datetime="2021-11-03T09:07:23.000Z" title="发表于 2021-11-03 17:07:23">2021-11-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/08/hello-world/" title="Hello World"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://th.wallhaven.cc/lg/6o/6op786.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/03/08/hello-world/" title="Hello World">Hello World</a><time datetime="2021-03-08T03:12:25.000Z" title="发表于 2021-03-08 11:12:25">2021-03-08</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(135deg,#E2B0FF 10%,#9F44D3 100%)"><div id="footer-wrap"><div class="copyright">&copy;2021 By Villian</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>function electric_clock_injector_config(){
+                var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+                var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img id="card-clock-loading" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-clock/clock/images/weather/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading" class="entered loading"></div></div></div></div></div>';
+                console.log('已挂载electric_clock')
+                // parent_div_git.innerHTML=item_html+parent_div_git.innerHTML // 无报错，但不影响使用(支持pjax跳转)
+                parent_div_git.insertAdjacentHTML("afterbegin",item_html) // 有报错，但不影响使用(支持pjax跳转)
+            }if( document.getElementsByClassName('sticky_layout')[0] && (location.pathname ==='all'|| 'all' ==='all')){
+
+            electric_clock_injector_config()
+        } </script><script src="https://pv.sohu.com/cityjson?ie=utf-8"></script><script data-pjax  src="https://cdn.jsdelivr.net/gh/Zfour/hexo-electric-clock@1.0.6/clock.js"></script><!-- hexo injector body_end end --></body></html>
